@@ -1,0 +1,86 @@
+﻿@page
+@model OiBoba.Pages.EditModel
+
+<div class="row pt-5">
+    <div class="col-md-4">
+        <form method="post">
+            <h4>Alteração de Product</h4>
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <input type="hidden" asp-for="Product.ProductId" />
+
+            <div class="form-group">
+                <label asp-for="Product.Nome" class="control-label"></label>
+                <input asp-for="Product.Nome" class="form-control" />
+                <span asp-validation-for="Product.Nome" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Product.Descricao" class="control-label"></label>
+                <input asp-for="Product.Descricao" class="form-control" />
+                <span asp-validation-for="Product.Descricao" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Product.ImagemUri" class="control-label"></label>
+                <input asp-for="Product.ImagemUri" class="form-control" />
+                <span asp-validation-for="Product.ImagemUri" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Product.Preco" class="control-label"></label>
+                <input asp-for="Product.Preco" class="form-control" />
+                <span asp-validation-for="Product.Preco" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mt-3 mb-3">
+                <input class="form-check-input" asp-for="Product.EntregaExpressa" />
+                <label asp-for="Product.EntregaExpressa"></label>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Product.DataCadastro" class="control-label"></label>
+                <input asp-for="Product.DataCadastro" class="form-control" />
+                <span asp-validation-for="Product.DataCadastro" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mt-3 mb-3">
+
+                <label asp-for="Product.MarcaId" class="control-label"></label>
+
+                <select class="form-select" asp-for="Product.MarcaId"
+                        asp-items="Model.MarcaOptionItems">
+                    <option value="">Selecione uma opção</option>
+                </select>
+
+                <span asp-validation-for="Product.MarcaId" class="text-danger">
+                </span>
+            </div>
+
+            <div class="form-group mt-3 mb-3">
+
+                <label asp-for="Product.Categorias" class="control-label"></label>
+
+                <select class="form-select" asp-for="CategoriaIds"
+                        asp-items="Model.CategoriaOptionItems">
+                </select>
+
+                <span asp-validation-for="Product.Categorias" class="text-danger">
+                </span>
+            </div>
+
+            <div class="form-group mt-4">
+                <input type="submit" value="Salvar" class="btn btn-primary" />
+                <input type="submit" value="Excluir" class="btn btn-danger"
+                asp-page-handler="Exclusao" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,54 @@
+﻿@page "/product/{slug}/{id:int:min(1)}"
+@model OiBoba.Pages.DetailsModel
+
+
+<h2 class="my-3">@Model.Product.Nome</h2>
+
+<div class="row">
+
+    <div class="col-4">
+        <img class="img-fluid rounded" src="@Model.Product.ImagemUri">
+    </div>
+
+    <div class="col-6">
+        <h4 class="my-3">Sobre:</h4>
+        <p>@Model.Product.Descricao</p>
+        <h4 class="my-3">Mais Info:</h4>
+        <ul>
+            <li>
+                <label asp-for="Product.Preco"></label>:
+                @Html.DisplayFor(model => model.Product.Preco)
+            </li>
+            <li>
+                <label asp-for="Product.EntregaExpressa"></label>: 
+                @Html.DisplayFor(model => model.Product.EntregaExpressaFormatada)
+            </li>
+            <li>
+                <label asp-for="Product.DataCadastro"></label>:
+                @Html.DisplayFor(model => model.Product.DataCadastro)
+            </li>
+            @if (Model.DescricaoMarca is not null)
+            {
+                <li>
+                    <label asp-for="Product.MarcaId"></label>:
+                    @Html.DisplayFor(model => model.DescricaoMarca)
+                </li>
+            }
+
+            @if (Model.Product.Categorias.Count > 0)
+            {
+                <li>
+                    <label asp-for="Product.Categorias"></label>:
+                    @string.Join(", ", Model.Product.Categorias.Select(item => item.Descricao))
+                </li>
+            }
+
+        </ul>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <a class="btn my-3 btn-primary"
+               asp-page="/Edit" asp-route-id="@Model.Product.ProductId">Editar</a>
+        }
+    </div>
+
+</div>

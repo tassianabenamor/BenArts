@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using OiBoba.DataAccessLayer;
 using OiBoba.Models;
 
-namespace OiBoba.Pages.ProductPage
+namespace OiBoba.Pages.Marcas
 {
     public class DetailsModel : PageModel
     {
@@ -19,23 +19,23 @@ namespace OiBoba.Pages.ProductPage
             _context = context;
         }
 
-      public Product Product { get; set; } = default!; 
+      public Marca Marca { get; set; } = default!; 
 
-        public async Task<IActionResult> OnGetAsync(Guid? id)
+        public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Products == null)
+            if (id == null || _context.Marca == null)
             {
                 return NotFound();
             }
 
-            var product = await _context.Products.FirstOrDefaultAsync(m => m.Id == id);
-            if (product == null)
+            var marca = await _context.Marca.FirstOrDefaultAsync(m => m.MarcaId == id);
+            if (marca == null)
             {
                 return NotFound();
             }
             else 
             {
-                Product = product;
+                Marca = marca;
             }
             return Page();
         }

@@ -25,9 +25,27 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>
+                        @* <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Produtos</a>
+                        </li> *@
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/ProductPage/Index">Products</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/QuemSomos">Quem Somos</a>
                         </li>
+                        </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-page="/Create">Produto</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-page="/Marcas/Index">Marca</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-page="/Categorias/Index">Categoria</a>
+                            </li>
+                        }
+                    </ul>
+                    <partial name="_LoginPartial" />
                     </ul>
                 </div>
             </div>
@@ -50,5 +68,6 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
+    @await Component.InvokeAsync("NToastNotify")
 </body>
 </html>

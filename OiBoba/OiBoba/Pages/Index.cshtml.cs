@@ -1,20 +1,22 @@
-﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using OiBoba.Models;
+using OiBoba.Services;
 
-namespace OiBoba.Pages
+public class IndexModel : PageModel
 {
-    public class IndexModel : PageModel
+    private IProductService _service;
+
+    public IndexModel(IProductService service)
     {
-        private readonly ILogger<IndexModel> _logger;
+        _service = service;
+    }
 
-        public IndexModel(ILogger<IndexModel> logger)
-        {
-            _logger = logger;
-        }
+    public IList<Product> ListaProduct { get; private set; }
 
-        public void OnGet()
-        {
+    public void OnGet()
+    {
+        ViewData["Title"] = "Home page";
 
-        }
+        ListaProduct = _service.ObterTodos();
     }
 }

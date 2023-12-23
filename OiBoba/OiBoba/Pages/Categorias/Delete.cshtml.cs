@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using OiBoba.DataAccessLayer;
 using OiBoba.Models;
 
-namespace OiBoba.Pages.ProductPage
+namespace OiBoba.Pages.Categorias
 {
     public class DeleteModel : PageModel
     {
@@ -20,40 +20,40 @@ namespace OiBoba.Pages.ProductPage
         }
 
         [BindProperty]
-      public Product Product { get; set; } = default!;
+      public Categoria Categoria { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(Guid? id)
+        public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Products == null)
+            if (id == null || _context.Categoria == null)
             {
                 return NotFound();
             }
 
-            var product = await _context.Products.FirstOrDefaultAsync(m => m.Id == id);
+            var categoria = await _context.Categoria.FirstOrDefaultAsync(m => m.CategoriaId == id);
 
-            if (product == null)
+            if (categoria == null)
             {
                 return NotFound();
             }
             else 
             {
-                Product = product;
+                Categoria = categoria;
             }
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(Guid? id)
+        public async Task<IActionResult> OnPostAsync(int? id)
         {
-            if (id == null || _context.Products == null)
+            if (id == null || _context.Categoria == null)
             {
                 return NotFound();
             }
-            var product = await _context.Products.FindAsync(id);
+            var categoria = await _context.Categoria.FindAsync(id);
 
-            if (product != null)
+            if (categoria != null)
             {
-                Product = product;
-                _context.Products.Remove(Product);
+                Categoria = categoria;
+                _context.Categoria.Remove(Categoria);
                 await _context.SaveChangesAsync();
             }
 

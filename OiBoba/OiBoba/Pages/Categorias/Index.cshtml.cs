@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using OiBoba.DataAccessLayer;
 using OiBoba.Models;
 
-namespace OiBoba.Pages.ProductPage
+namespace OiBoba.Pages.Categorias
 {
     public class IndexModel : PageModel
     {
@@ -19,13 +19,13 @@ namespace OiBoba.Pages.ProductPage
             _context = context;
         }
 
-        public IList<Product> Product { get;set; } = default!;
+        public IList<Categoria> Categoria { get;set; } = default!;
 
         public async Task OnGetAsync()
         {
-            if (_context.Products != null)
+            if (_context.Categoria != null)
             {
-                Product = await _context.Products.ToListAsync();
+                Categoria = await _context.Categoria.ToListAsync();
             }
         }
     }
